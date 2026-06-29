@@ -15,7 +15,7 @@ form.addEventListener("submit", async function (e) {
     try {
 
         const response = await fetch(
-            "http://127.0.0.1:8000/login",
+            "https://job-application-co-pilot-1.onrender.com/login",
             {
 
                 method: "POST",

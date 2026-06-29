@@ -6,7 +6,7 @@ async function loadApplication() {
 
     const response = await fetch(
 
-        `http://127.0.0.1:8000/applications/${applicationId}`
+        `https://job-application-co-pilot-1.onrender.com/applications/${applicationId}`
 
     );
 
@@ -28,7 +28,7 @@ document
 .getElementById("generateBtn")
 .addEventListener("click", async () => {
 
-    const response = await fetch(`http://127.0.0.1:8000/applications/${applicationId}/generate`,
+    const response = await fetch(`https://job-application-co-pilot-1.onrender.com/applications/${applicationId}/generate`,
 
         {
 

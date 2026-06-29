@@ -11,7 +11,7 @@ async function loadGeneratedResults() {
 
     const response = await fetch(
 
-        `http://127.0.0.1:8000/drafts/${draftId}`
+        `https://job-application-co-pilot-1.onrender.com/drafts/${draftId}`
 
     );
 

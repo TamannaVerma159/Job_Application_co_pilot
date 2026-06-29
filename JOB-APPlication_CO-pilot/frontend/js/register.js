@@ -29,7 +29,7 @@ form.addEventListener("submit", async (e) => {
     const name = `${firstName} ${lastName}`;
 
     try {
-        const response = await fetch("http://127.0.0.1:8000/register", {
+        const response = await fetch("https://job-application-co-pilot-1.onrender.com/register", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ name, email, password })

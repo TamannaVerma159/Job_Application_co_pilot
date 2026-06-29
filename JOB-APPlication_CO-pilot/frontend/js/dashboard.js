@@ -1,4 +1,4 @@
-const API = "http://127.0.0.1:8000";
+const API = "https://job-application-co-pilot-1.onrender.com";
 
 // Auth guard — redirect to login if no session
 const user = JSON.parse(localStorage.getItem("user"));
