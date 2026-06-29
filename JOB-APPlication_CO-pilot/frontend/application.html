@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applications – Job Copilot</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .page-header{
+            display:flex;justify-content:space-between;align-items:center;
+            margin-bottom:24px;flex-wrap:wrap;gap:12px;
+        }
+        .page-header h1{ font-size:22px;color:#1e293b; }
+
+        .table-card{
+            background:#fff;border-radius:12px;
+            box-shadow:0 2px 10px rgba(0,0,0,.08);overflow:hidden;
+        }
+        .table-card table{ margin-top:0; }
+        .table-card th{
+            font-size:12px;color:#64748b;
+            text-transform:uppercase;letter-spacing:.5px;
+        }
+        .table-card td{ color:#1e293b;font-size:14px; }
+
+        .action-link{
+            color:#2563eb;text-decoration:none;
+            font-size:12px;font-weight:500;margin-right:10px;
+            white-space:nowrap;
+        }
+        .action-link:hover{ text-decoration:underline; }
+
+        .status-badge{
+            display:inline-block;padding:3px 10px;
+            border-radius:20px;font-size:12px;font-weight:600;
+        }
+        .status-badge.not_applied { background:#fef3c7;color:#92400e; }
+        .status-badge.applied     { background:#dbeafe;color:#1e40af; }
+        .status-badge.interview   { background:#ede9fe;color:#5b21b6; }
+        .status-badge.offer       { background:#dcfce7;color:#166534; }
+        .status-badge.rejected    { background:#fee2e2;color:#991b1b; }
+
+        .resume-chip{
+            display:inline-flex;align-items:center;gap:4px;
+            font-size:11px;color:#16a34a;
+            background:#f0fdf4;border:1px solid #bbf7d0;
+            border-radius:12px;padding:2px 8px;
+        }
+        .no-resume-chip{
+            font-size:11px;color:#92400e;
+            background:#fffbeb;border:1px solid #fde68a;
+            border-radius:12px;padding:2px 8px;
+        }
+
+        .empty-state{
+            text-align:center;padding:64px 20px;
+        }
+        .empty-state .icon{ font-size:48px;margin-bottom:16px; }
+        .empty-state p{ font-size:15px;color:#64748b;margin-bottom:20px; }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <h2>Job Co-Pilot</h2>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="application.html" class="active">Applications</a>
+        <a href="resume.html">Resume</a>
+        <a href="cover-letter.html">Cover Letter</a>
+        <a href="interview.html">Interview</a>
+        <button id="logoutBtn">Logout</button>
+    </div>
+
+    <div class="main-content">
+        <div class="page-header">
+            <h1>My Applications</h1>
+            <button class="btn-primary" id="newAppBtn">+ New Application</button>
+        </div>
+
+        <div class="table-card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Job Title</th>
+                        <th>Company</th>
+                        <th>Location</th>
+                        <th>Status</th>
+                        <th>Resume</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="applicationTable">
+                    <tr><td colspan="7" style="text-align:center;color:#94a3b8;padding:40px;">Loading…</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- ══ New Application Drawer ══ -->
+    <div class="drawer-overlay" id="drawerOverlay">
+        <div class="drawer">
+            <div class="drawer-head">
+                <h2>New Application</h2>
+                <button class="drawer-close" id="drawerClose">✕</button>
+            </div>
+
+            <div class="drawer-body">
+
+                <div class="info-banner blue">
+                    💡 Fill in the job details below. You can upload a resume and generate AI content after saving.
+                </div>
+
+                <div class="form-row">
+                    <div class="field-block">
+                        <label>Company Name <span style="color:#ef4444">*</span></label>
+                        <input type="text" id="f-company" placeholder="e.g. Google" required>
+                        <span class="field-err" id="err-company"></span>
+                    </div>
+                    <div class="field-block">
+                        <label>Job Title <span style="color:#ef4444">*</span></label>
+                        <input type="text" id="f-title" placeholder="e.g. Software Engineer" required>
+                        <span class="field-err" id="err-title"></span>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="field-block">
+                        <label>Location <span class="opt">(optional)</span></label>
+                        <input type="text" id="f-location" placeholder="e.g. Remote, New York">
+                    </div>
+                    <div class="field-block">
+                        <label>Application Status</label>
+                        <select id="f-status">
+                            <option value="not_applied">Not Applied</option>
+                            <option value="applied">Applied</option>
+                            <option value="interview">Interview</option>
+                            <option value="offer">Offer</option>
+                            <option value="rejected">Rejected</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="field-block">
+                    <label>Job Posting URL <span class="opt">(optional)</span></label>
+                    <input type="url" id="f-url" placeholder="https://careers.company.com/job/123">
+                </div>
+
+                <div class="field-block">
+                    <label>Job Description <span style="color:#ef4444">*</span></label>
+                    <small style="color:#64748b;font-size:12px;margin-bottom:4px;display:block;">
+                        Paste the full job description here. The AI will use it to tailor your resume and cover letter.
+                    </small>
+                    <textarea id="f-jd" rows="10"
+                        placeholder="Paste the complete job description here…&#10;&#10;We are looking for a Software Engineer to join our team…"></textarea>
+                    <span class="field-err" id="err-jd"></span>
+                </div>
+
+                <div class="field-block">
+                    <label>Notes <span class="opt">(optional)</span></label>
+                    <textarea id="f-notes" rows="3"
+                        placeholder="Referral contact, application deadline, salary range…"></textarea>
+                </div>
+
+            </div>
+
+            <div class="drawer-foot">
+                <button class="btn-ghost" id="drawerCancel">Cancel</button>
+                <button class="btn-primary" id="saveAppBtn">Save Application</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script src="js/applications.js"></script>
+</body>
+</html>

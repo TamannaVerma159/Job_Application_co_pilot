@@ -1,0 +1,1 @@
+console.log("Job Application Co-Pilot Home Page Loaded");

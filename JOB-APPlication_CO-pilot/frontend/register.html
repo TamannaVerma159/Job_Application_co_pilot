@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register – Job Copilot</title>
+    <link rel="stylesheet" href="css/register.css">
+</head>
+<body>
+
+<div class="page-wrap">
+
+    <!-- ── Left branding panel ── -->
+    <aside class="left-panel">
+        <div class="brand">
+            <span class="brand-icon">💼</span>
+            <span class="brand-name">Job<strong>Copilot</strong></span>
+        </div>
+
+        <div class="left-body">
+            <h2>Your career,<br>on autopilot.</h2>
+            <ul class="perks">
+                <li>
+                    <span class="perk-dot"></span>
+                    AI-tailored resumes for every job
+                </li>
+                <li>
+                    <span class="perk-dot"></span>
+                    Auto-generated cover letters
+                </li>
+                <li>
+                    <span class="perk-dot"></span>
+                    Interview question prep
+                </li>
+                <li>
+                    <span class="perk-dot"></span>
+                    Track all applications in one place
+                </li>
+            </ul>
+        </div>
+
+        <p class="left-footer">Join thousands of job seekers landing faster.</p>
+    </aside>
+
+    <!-- ── Right form panel ── -->
+    <main class="right-panel">
+        <div class="form-card">
+
+            <!-- Heading -->
+            <h1 class="form-title">Create your free account</h1>
+            <p class="form-tagline">It's free. No credit card needed.</p>
+
+            <form id="registerForm" novalidate>
+
+                <!-- 1. First Name -->
+                <div class="field-group">
+                    <input
+                        type="text"
+                        id="firstName"
+                        class="field-input"
+                        placeholder=" "
+                        required
+                        autocomplete="given-name"
+                    >
+                    <label for="firstName" class="field-label">First name</label>
+                    <span class="field-err" id="firstNameErr"></span>
+                </div>
+
+                <!-- 2. Last Name (completes the full name) -->
+                <div class="field-group">
+                    <input
+                        type="text"
+                        id="lastName"
+                        class="field-input"
+                        placeholder=" "
+                        required
+                        autocomplete="family-name"
+                    >
+                    <label for="lastName" class="field-label">Last name</label>
+                    <span class="field-err" id="lastNameErr"></span>
+                </div>
+
+                <!-- 3. Email Address -->
+                <div class="field-group">
+                    <input
+                        type="email"
+                        id="email"
+                        class="field-input"
+                        placeholder=" "
+                        required
+                        autocomplete="email"
+                    >
+                    <label for="email" class="field-label">Email address</label>
+                    <span class="field-err" id="emailErr"></span>
+                </div>
+
+                <!-- 4. Mobile (optional) -->
+                <div class="field-group">
+                    <input
+                        type="tel"
+                        id="mobile"
+                        class="field-input"
+                        placeholder=" "
+                        maxlength="10"
+                        autocomplete="tel"
+                    >
+                    <label for="mobile" class="field-label">
+                        Mobile number <span class="optional">(optional)</span>
+                    </label>
+                    <span class="field-err" id="mobileErr"></span>
+                </div>
+
+                <!-- 5. Password -->
+                <div class="field-group">
+                    <input
+                        type="password"
+                        id="password"
+                        class="field-input"
+                        placeholder=" "
+                        required
+                        autocomplete="new-password"
+                    >
+                    <label for="password" class="field-label">Password</label>
+                    <button type="button" class="eye-btn" data-target="password" aria-label="Show or hide password">
+                        <svg class="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                    </button>
+                    <span class="field-hint">Minimum 6 characters</span>
+                    <span class="field-err" id="passwordErr"></span>
+                </div>
+
+                <!-- 6. Confirm Password -->
+                <div class="field-group">
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        class="field-input"
+                        placeholder=" "
+                        required
+                        autocomplete="new-password"
+                    >
+                    <label for="confirmPassword" class="field-label">Confirm password</label>
+                    <button type="button" class="eye-btn" data-target="confirmPassword" aria-label="Show or hide confirm password">
+                        <svg class="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                    </button>
+                    <span class="field-err" id="confirmErr"></span>
+                </div>
+
+                <!-- 7. Work experience -->
+                <div class="exp-group">
+                    <p class="exp-label">Work experience</p>
+                    <div class="exp-options">
+                        <label class="exp-chip">
+                            <input type="radio" name="experience" value="fresher" checked>
+                            <span>Fresher</span>
+                        </label>
+                        <label class="exp-chip">
+                            <input type="radio" name="experience" value="experienced">
+                            <span>Experienced</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Server feedback -->
+                <div id="message" class="form-message" role="alert"></div>
+
+                <!-- Submit CTA -->
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    <span class="btn-text">Register for free</span>
+                    <span class="btn-spinner" hidden>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83
+                                     M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+                        </svg>
+                    </span>
+                </button>
+
+                <!-- Terms — second-to-last -->
+                <p class="terms">
+                    By registering you agree to our
+                    <a href="#">Terms of use</a> and <a href="#">Privacy policy</a>.
+                </p>
+
+                <!-- Sign-in link — absolute last item inside the form flow -->
+                <div class="signin-row">
+                    Already have an account?
+                    <a href="login.html" class="signin-link">Sign in</a>
+                </div>
+
+            </form>
+
+        </div>
+    </main>
+
+</div>
+
+<script src="js/register.js"></script>
+<script>
+    /* Eye toggle */
+    document.querySelectorAll('.eye-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const inp = document.getElementById(btn.dataset.target);
+            inp.type = inp.type === 'password' ? 'text' : 'password';
+            btn.classList.toggle('active');
+        });
+    });
+
+    /* Inline validation */
+    function setErr(id, msg) {
+        const el = document.getElementById(id);
+        if (el) el.textContent = msg;
+    }
+
+    function clearErrs() {
+        ['firstNameErr','lastNameErr','emailErr','mobileErr','passwordErr','confirmErr']
+            .forEach(id => setErr(id, ''));
+    }
+
+    document.getElementById('registerForm').addEventListener('submit', e => {
+        clearErrs();
+        let ok = true;
+
+        const firstName = document.getElementById('firstName').value.trim();
+        const lastName  = document.getElementById('lastName').value.trim();
+        const email     = document.getElementById('email').value.trim();
+        const mobile    = document.getElementById('mobile').value.trim();
+        const password  = document.getElementById('password').value;
+        const confirm   = document.getElementById('confirmPassword').value;
+
+        if (!firstName) { setErr('firstNameErr', 'Please enter your first name'); ok = false; }
+        if (!lastName)  { setErr('lastNameErr',  'Please enter your last name');  ok = false; }
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            setErr('emailErr', 'Enter a valid email address'); ok = false;
+        }
+        if (mobile && !/^\d{10}$/.test(mobile)) {
+            setErr('mobileErr', 'Enter a valid 10-digit mobile number'); ok = false;
+        }
+        if (password.length < 6) {
+            setErr('passwordErr', 'Password must be at least 6 characters'); ok = false;
+        }
+        if (password !== confirm) {
+            setErr('confirmErr', 'Passwords do not match'); ok = false;
+        }
+
+        if (!ok) e.preventDefault();
+    });
+</script>
+
+</body>
+</html>

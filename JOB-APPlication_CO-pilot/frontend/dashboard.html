@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Application Co-Pilot</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="sidebar">
+
+        <h2>Job Co-Pilot</h2>
+
+        <a href="dashboard.html">Dashboard</a>
+        <a href="application.html">Applications</a>
+        <a href="resume.html">Resume</a>
+        <a href="cover-letter.html">Cover Letter</a>
+        <a href="interview.html">Interview</a>
+
+        <button id="logoutBtn">
+            Logout
+        </button>
+
+    </div>
+
+    <div class="main-content">
+
+        <header>
+
+            <h1>Dashboard</h1>
+
+            <p>
+                Welcome to your Job Application Co-Pilot
+            </p>
+
+        </header>
+
+        <div class="cards">
+
+            <div class="card">
+
+                <h2 id="totalApplications">0</h2>
+
+                <p>Total Applications</p>
+
+            </div>
+
+            <div class="card">
+
+                <h2 id="generatedResumes">0</h2>
+
+                <p>Generated Resumes</p>
+
+            </div>
+
+            <div class="card">
+
+                <h2 id="generatedCovers">0</h2>
+
+                <p>Cover Letters</p>
+
+            </div>
+
+            <div class="card">
+
+                <h2 id="interviewSets">0</h2>
+
+                <p>Interview Sets</p>
+
+            </div>
+
+        </div>
+
+        <section class="recent-section">
+
+            <h2>Recent Applications</h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Job Title</th>
+                        <th>Company</th>
+                        <th>Status</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="recentApplications">
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+    </div>
+
+    <script src="js/dashboard.js"></script>
+
+</body>
+</html>

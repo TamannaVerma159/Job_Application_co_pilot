@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+sqlalchemy
+pypdf
+python-multipart
+langchain_groq
+python-dotenv
+langgraph
+python-docx
+reportlab
+diff-match-patch
+Typing
+python-jose[cryptography]

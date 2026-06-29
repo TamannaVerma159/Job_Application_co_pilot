@@ -1,0 +1,33 @@
+# Environment variables - NEVER commit these
+.env
+.env.*
+!.env.example
+
+# Python virtual environment
+env/
+venv/
+.venv/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Uploaded files (user data)
+backend/uploads/
+
+# Generated files (can be recreated)
+backend/generated_files/
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# VS Code
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
