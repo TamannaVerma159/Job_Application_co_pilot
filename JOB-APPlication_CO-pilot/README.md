@@ -210,13 +210,63 @@ Generate Interview Questions  →  Practice Mode
 
 ## Database Models
 
-| Table | Key Columns |
-|-------|-------------|
-| `users` | id, name, email, password |
-| `resumes` | id, user_id, filename, resume_text |
-| `applications` | id, user_id, resume_id, job_title, company, jd_text, status, tailored_resume, cover_letter, interview_questions |
-| `generated_resumes` | id, application_id, resume_rewrite, created_at |
-| `drafts` | id, application_id, fit_analysis, tailored_resume, cover_letter, interview_questions |
+See [`backend/models.py`](backend/models.py) for the full SQLAlchemy definitions.
+
+```
+┌──────────┐     ┌─────────────┐     ┌──────────────────────┐
+│  users   │     │   resumes   │     │     applications     │
+│──────────│     │─────────────│     │──────────────────────│
+│ id  PK   │──┐  │ id  PK      │──┐  │ id  PK               │
+│ name     │  ├─►│ user_id  FK │  └─►│ resume_id  FK        │
+│ email    │  │  │ filename    │     │ user_id    FK         │
+│ password │  │  │ file_path   │     │ job_title / company   │
+└──────────┘  │  │ resume_text │     │ jd_text / status      │
+              │  └─────────────┘     │ tailored_resume        │
+              │                      │ cover_letter           │
+              │                      │ interview_questions    │
+              │                      └───────┬──┬──┬─────────┘
+              │                              │  │  │
+              │        ┌─────────────────────┘  │  │
+              │        ▼                         │  │
+              │  ┌───────────┐                   │  │
+              │  │  drafts   │                   │  │
+              │  │───────────│                   │  │
+              ├─►│ user_id FK│                   │  │
+              │  │ app_id  FK│                   │  │
+              │  │ resume_id │  ┌────────────────┘  │
+              │  │fit_analysis│ ▼                   │
+              │  │cover_letter│ ┌──────────────────┐│
+              │  │interview_q │ │ generated_resumes ││
+              │  └───────────┘ │──────────────────  ││
+              │                │ id  PK             ││
+              ├───────────────►│ user_id  FK        ││
+              │                │ application_id FK  ││
+              │                │ resume_id  FK      ││
+              │                │ content / version  ││
+              │                └────────────────────┘│
+              │                                       │
+              │                ┌─────────────────────┘
+              │                ▼
+              │         ┌─────────────┐
+              │         │  revisions  │
+              │         │─────────────│
+              │         │ id  PK      │
+              │         │ application_id FK
+              │         │ old_resume  │
+              │         │ new_resume  │
+              │         └─────────────┘
+```
+
+**Relationship summary:**
+
+| Relationship | Type | Notes |
+|---|---|---|
+| `User` → `Application` | one-to-many | cascade delete |
+| `User` → `Resume` | one-to-many | — |
+| `Resume` → `Application` | one-to-many (via `resume_id`) | linked resume |
+| `Application` → `Draft` | one-to-one | stores AI output from full pipeline |
+| `Application` → `GeneratedResume` | one-to-one (unique FK) | stores tailored resume, versioned |
+| `Application` → `Revision` | one-to-many | change history |
 
 ---
 
