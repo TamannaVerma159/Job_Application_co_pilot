@@ -59,10 +59,11 @@ app = FastAPI()
 
 
 origins = [
-    "http://127.0.0.1:5500",   # Live Server
+    "http://127.0.0.1:5500",
     "http://localhost:5500",
-    "http://127.0.0.1:3000",   # if using another frontend
+    "http://127.0.0.1:3000",
     "http://localhost:3000",
+    "https://job-application-co-pilot-frontend.onrender.com",
 ]
 
 app.add_middleware(
