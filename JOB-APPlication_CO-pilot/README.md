@@ -2,6 +2,8 @@
 
 An AI-powered job application assistant that helps you tailor your resume, generate cover letters, and prepare for interviews — all from one place.
 
+🚀 **[Live Demo → job-application-co-pilot-frontend.onrender.com](https://job-application-co-pilot-frontend.onrender.com)**
+
 ---
 
 ## Features
